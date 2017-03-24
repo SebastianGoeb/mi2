@@ -30,11 +30,13 @@
 tune --> line, line.
 line --> bar1, bar, bar, bar4.
 
-bar1 --> tonic, tonic, [bl].
-bar  --> tonic, tonic, [bl].
-bar  --> subdominant, subdominant, [bl].
-bar  --> dominant, dominant, [bl].
-bar4 --> tonic, tonic, [bl].
+bar1 --> tonic, any, [bl].
+bar  --> any, any, [bl].
+bar4 --> any, tonic, [bl].
+
+any --> tonic.
+any --> dominant.
+any --> subdominant.
 
 tonic --> tonicA.
 tonic --> tonicB.
@@ -56,15 +58,15 @@ subdominant --> subdominantC.
 %  in curly braces " {..} ".
 
 tonicA --> ton(1), by_ton(1), ton(1).
-tonicB --> ton(A), ton(B), { sum_int(A, B, s(s(1))) }.
+tonicB --> by_ton(A), by_ton(B), { sum_int(A, B, s(s(1))) }.
 tonicC --> ton(s(s(1))).
 
 dominantA --> dom(1), by_dom(1), dom(1).
-dominantB --> dom(A), dom(B), { sum_int(A, B, s(s(1))) }.
+dominantB --> by_dom(A), by_dom(B), { sum_int(A, B, s(s(1))) }.
 dominantC --> dom(s(s(1))).
 
 subdominantA --> subd(1), by_subd(1), subd(1).
-subdominantB --> subd(A), subd(B), { sum_int(A, B, s(s(1))) }.
+subdominantB --> by_subd(A), by_subd(B), { sum_int(A, B, s(s(1))) }.
 subdominantC --> subd(s(s(1))).
 
 ton(X) --> [a(X)].
@@ -209,3 +211,4 @@ make_new_with_header( AbcFile, NewAbcFile ) :-
 %  Now the music can be viewed, and played with the generated midi.
 %
 %   abc2ly and lilypond are neither installed on DICE, but are freely available.
+% get_notes('accepted_1.abc',Input), tune(Input,[]).
